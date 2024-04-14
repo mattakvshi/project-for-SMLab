@@ -1,0 +1,34 @@
+﻿-- Последовательность для заполнения PK в таблице "Ведосмость оценок"
+-- drop sequence seq_grades_list_code;
+create sequence seq_grades_list_code
+start with 1
+increment by 1
+nocache;
+
+-- Создадим таблицу для хранения информации о "Ведосмость оценок"
+-- drop table ks_grades_list purge;
+create table ks_grades_list
+(
+    code          number(19) default seq_link_student_course_code.nextval, -- Первичный ключ
+    student_code  number(19),                                              -- Код студента(ссылка на ks_students)
+    course_code   number(19),                                              -- Код курса(ссылка на ks_courses)
+    grade_date    date,                                                    -- Дата оценки
+    grade         number(5,2),                                             -- Оценка(может быть не целая)
+    datetime      timestamp default systimestamp,                          -- Дата последнего обновления
+    is_delete     number(1) default 0,                                     -- Признак удалена ли строка(0 - не удаление, 1 - удалена)
+    ------------------------------------------------
+    constraint ks_grades_list_pk primary key (code) using index tablespace tblspc_oltp_data,
+    constraint ks_grades_list_fk1 foreign key (student_code) references ks_students (code),
+    constraint ks_grades_list_fk2 foreign key (course_code) references ks_courses (code)
+);
+create index ks_grades_list_i1 on ks_grades_list(student_code) tablespace tblspc_oltp_data;
+create index ks_grades_list_i2 on ks_grades_list(course_code) tablespace tblspc_oltp_data;
+
+comment on table ks_grades_list is 'Хранение нформации о "Ведосмости оценок"'; 
+comment on column ks_grades_list.code         is 'Первичный ключ'; 
+comment on column ks_grades_list.student_code is 'Код студента(ссылка на ks_students)'; 
+comment on column ks_grades_list.course_code  is 'Код курса(ссылка на ks_courses)'; 
+comment on column ks_grades_list.grade_date   is 'Дата оценки'; 
+comment on column ks_grades_list.grade        is 'Оценка(может быть не целая)'; 
+comment on column ks_grades_list.datetime     is 'Дата последнего обновления'; 
+comment on column ks_grades_list.is_delete    is 'Признак удалена ли строка(0 - не удаление, 1 - удалена)'; 

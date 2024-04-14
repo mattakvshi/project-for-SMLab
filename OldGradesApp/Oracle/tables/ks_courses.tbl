@@ -1,0 +1,26 @@
+﻿-- Последовательность для заполнения PK в таблице "Курсы"
+-- drop sequence seq_courses_code;
+create sequence seq_courses_code
+start with 1
+increment by 1
+nocache;
+
+-- Создадим таблицу для хранения информации о "Курсах"
+-- drop table ks_courses purge;
+create table ks_courses
+(
+    code          number(19) default seq_courses_code.nextval, -- Первичный ключ
+    name          varchar2(255 char),                          -- Название курса
+    date_start    date not null,                               -- Дата начала курса
+    date_end      date,                                        -- Дата окончания курса
+    datetime      timestamp default systimestamp,              -- Дата последнего обновления
+    ------------------------------------------------
+    constraint ks_courses_pk primary key (code) using index tablespace tblspc_oltp_data
+);
+
+comment on table ks_courses is 'Хранение информации о "Курсах"'; 
+comment on column ks_courses.code       is 'Первичный ключ'; 
+comment on column ks_courses.name       is 'Название курса'; 
+comment on column ks_courses.date_start is 'Дата начала курса'; 
+comment on column ks_courses.date_end   is 'Дата окончания курса'; 
+comment on column ks_courses.datetime   is 'Дата последнего обновления'; 

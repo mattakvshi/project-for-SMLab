@@ -1,0 +1,33 @@
+﻿-- Последовательность для заполнения PK в таблице "Связь студента и курса"
+-- drop sequence seq_link_student_course_code;
+create sequence seq_link_student_course_code
+start with 1
+increment by 1
+nocache;
+
+-- Создадим таблицу для хранения информации о "Связь студента и курса"
+-- drop table ks_link_student_course purge;
+create table ks_link_student_course
+(
+    code          number(19) default seq_link_student_course_code.nextval, -- Первичный ключ
+    student_code  number(19),                                              -- Код студента(ссылка на ks_students)
+    course_code   number(19),                                              -- Код курса(ссылка на ks_courses)
+    date_start    date not null,                                           -- Дата начала участия в курсе
+    date_end      date,                                                    -- Дата окончания участия в курсе
+    datetime      timestamp default systimestamp,                          -- Дата последнего обновления
+    ------------------------------------------------
+    constraint ks_link_student_course_pk primary key (code) using index tablespace tblspc_oltp_data,
+    constraint ks_link_student_course_fk1 foreign key (student_code) references ks_students (code),
+    constraint ks_link_student_course_fk2 foreign key (course_code) references ks_courses (code)
+);
+
+create index ks_link_student_course_i1 on ks_link_student_course(student_code) tablespace tblspc_oltp_data;
+create index ks_link_student_course_i2 on ks_link_student_course(course_code) tablespace tblspc_oltp_data;
+
+comment on table ks_link_student_course is 'Хранение информации о "Связи студента и курса"'; 
+comment on column ks_link_student_course.code         is 'Первичный ключ'; 
+comment on column ks_link_student_course.student_code is 'Код студента(ссылка на ks_students)'; 
+comment on column ks_link_student_course.course_code  is 'Код курса(ссылка на ks_courses)'; 
+comment on column ks_link_student_course.date_start   is 'Дата начала участия в курсе'; 
+comment on column ks_link_student_course.date_end     is 'Дата окончания участия в курсе'; 
+comment on column ks_link_student_course.datetime     is 'Дата последнего обновления'; 

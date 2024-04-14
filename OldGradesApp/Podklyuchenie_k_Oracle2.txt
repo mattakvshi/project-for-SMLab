@@ -1,0 +1,11 @@
+Развернут по статическому адресу http://178.154.199.253/
+Подключиться можно следующим образом.
+
+Прописать адрес в tns:
+
+kubsu.world = (description=(address=(protocol=tcp)(host=178.154.199.253)(port=1521))(connect_data=(server=dedicated)(service_name=studytst)))
+
+Пароль от пользователя, в котором есть данные по уроку: kubsu_study / Welcome1
+
+для примера, по этому эндпоинту возвращается результат из нашей задачки 
+http://178.154.199.253/dsks-cmw/api/rest/kubsu_study/web_data_api/grade

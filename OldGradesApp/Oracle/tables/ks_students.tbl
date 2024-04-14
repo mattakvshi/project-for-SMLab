@@ -1,0 +1,26 @@
+﻿-- Последовательность для заполнения PK в таблице "Студенты"
+-- drop sequence seq_students_code;
+create sequence seq_students_code
+start with 1
+increment by 1
+nocache;
+
+-- Создадим таблицу для хранения информации о "Студентах"
+-- drop table ks_students purge;
+create table ks_students
+(
+    code          number(19) default seq_students_code.nextval,  -- Первичный ключ
+    first_name    varchar2(255 char) not null,                   -- Имя
+    second_name   varchar2(255 char),                            -- Отчетсво
+    last_name     varchar2(255 char) not null,                   -- Фамилия
+    datetime      timestamp default systimestamp,                -- Дата последнего обновления
+    ------------------------------------------------
+    constraint ks_students_pk primary key (code) using index tablespace tblspc_oltp_data
+);
+comment on table ks_students is 'Хранение информации о "Студентах"';
+comment on column ks_students.code        is 'Первичный ключ'; 
+comment on column ks_students.first_name  is 'Имя'; 
+comment on column ks_students.second_name is 'Отчетсво'; 
+comment on column ks_students.last_name   is 'Фамилия'; 
+comment on column ks_students.datetime    is 'Дата последнего обновления'; 
+
