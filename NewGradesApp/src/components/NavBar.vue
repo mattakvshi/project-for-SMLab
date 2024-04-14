@@ -1,6 +1,7 @@
 <script setup>
 import BigMenu from './BigMenu.vue';
-import MinMenu from './MinMenu.vue';
+// import MinMenu from './MinMenu.vue';
+import SidePanel from './SidePanel.vue';
 
 defineProps({
 	toggleTheme: Function,
@@ -15,7 +16,8 @@ defineProps({
 				<big-menu></big-menu>
 			</div>
 			<div class="small-screen-center">
-				<min-menu></min-menu>
+				<!-- <min-menu></min-menu> -->
+				<side-panel></side-panel>
 			</div>
 		</template>
 

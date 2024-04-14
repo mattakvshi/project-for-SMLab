@@ -10,13 +10,14 @@ import Avatar from 'primevue/avatar';
 import Menu from 'primevue/menu';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import Card from 'primevue/card';
+import Sidebar from 'primevue/sidebar';
 
 import './assets/app.css';
 //import 'primevue/resources/themes/aura-light-purple/theme.css';
 //import 'primevue/resources/themes/aura-dark-purple/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
+import '/node_modules/primeflex/primeflex.css';
 
 const app = createApp(App);
 
@@ -30,7 +31,7 @@ app.component('Avatar', Avatar);
 app.component('Menu', Menu);
 app.component('DataTable', DataTable);
 app.component('Column', Column);
-app.component('Card', Card);
+app.component('Sidebar', Sidebar);
 
 app.use(router);
 
