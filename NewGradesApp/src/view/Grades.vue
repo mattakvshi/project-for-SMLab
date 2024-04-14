@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import GrdTable from '../components/grade/GrdTable.vue';
+</script>
 
 <template>
-	<div>Grades</div>
+	<grd-table></grd-table>
 </template>
 
 <style></style>
