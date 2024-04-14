@@ -1,11 +1,24 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
+import App from './App.vue';
+import { createPinia } from 'pinia';
+import PrimeVue from 'primevue/config';
 
-const app = createApp(App)
+import Button from 'primevue/button';
+import Toolbar from 'primevue/toolbar';
 
-const pinia = createPinia()
-app.use(pinia)
+import './assets/app.css';
+//import 'primevue/resources/themes/aura-light-purple/theme.css';
+//import 'primevue/resources/themes/aura-dark-purple/theme.css';
+import 'primevue/resources/primevue.min.css';
+import 'primeicons/primeicons.css';
 
-app.mount('#app')
+const app = createApp(App);
+
+const pinia = createPinia();
+app.use(pinia);
+
+app.use(PrimeVue);
+app.component('Button', Button);
+app.component('Toolbar', Toolbar);
+
+app.mount('#app');
