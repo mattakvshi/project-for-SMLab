@@ -1,10 +1,5 @@
 <template>
 	<div class="card">
-		<div class="table-title">
-			<h1>Grades Table</h1>
-			<Button icon="pi pi-plus" style="width: 40px; height: 40px" />
-		</div>
-
 		<DataTable
 			:value="customers"
 			paginator
@@ -44,12 +39,4 @@ import { ref, onMounted } from 'vue';
 const customers = ref();
 </script>
 
-<style scoped>
-.table-title {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-	padding: 1rem 2rem;
-}
-</style>
+<style scoped></style>

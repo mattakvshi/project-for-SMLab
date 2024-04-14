@@ -11,6 +11,8 @@ import Menu from 'primevue/menu';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Sidebar from 'primevue/sidebar';
+import Dialog from 'primevue/dialog';
+import InputText from 'primevue/inputtext';
 
 import './assets/app.css';
 //import 'primevue/resources/themes/aura-light-purple/theme.css';
@@ -32,6 +34,8 @@ app.component('Menu', Menu);
 app.component('DataTable', DataTable);
 app.component('Column', Column);
 app.component('Sidebar', Sidebar);
+app.component('Dialog', Dialog);
+app.component('InputText', InputText);
 
 app.use(router);
 
