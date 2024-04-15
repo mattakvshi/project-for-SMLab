@@ -9,7 +9,26 @@ import GrdDialog from '../components/grade/GrdDialog.vue';
 		<grd-dialog></grd-dialog>
 	</div>
 
-	<grd-table></grd-table>
+	<Suspense>
+		<!-- component with nested async dependencies -->
+		<grd-table></grd-table>
+
+		<!-- loading state via #fallback slot -->
+		<template #fallback>
+			<div
+				class="card flex justify-content-center align-items-center"
+				style="height: 60vh"
+			>
+				<ProgressSpinner
+					style="width: 60px; height: 60px"
+					strokeWidth="8"
+					fill="var(--surface-ground)"
+					animationDuration=".5s"
+					aria-label="Custom ProgressSpinner"
+				/>
+			</div>
+		</template>
+	</Suspense>
 </template>
 
 <style>

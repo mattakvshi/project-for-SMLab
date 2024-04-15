@@ -17,6 +17,7 @@ import InputNumber from 'primevue/inputnumber';
 import MultiSelect from 'primevue/multiselect';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
+import ProgressSpinner from 'primevue/progressspinner';
 
 import './assets/app.css';
 //import 'primevue/resources/themes/aura-light-purple/theme.css';
@@ -45,6 +46,7 @@ app.component('InputNumber', InputNumber);
 app.component('MultiSelect', MultiSelect);
 app.component('Toast', Toast);
 app.use(ToastService);
+app.component('ProgressSpinner', ProgressSpinner);
 
 app.use(router);
 

@@ -1,6 +1,5 @@
 <script setup>
-import Toolbar from 'primevue/toolbar';
-import { ref, onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 
 import { useStudentStore } from '../../store/modules/student';
 import { useGradeStore } from '../../store/modules/grade';
@@ -8,28 +7,24 @@ import { useGradeStore } from '../../store/modules/grade';
 const studentStore = useStudentStore();
 const gradeStore = useGradeStore();
 
-const fetchData = async () => {
-	await Promise.all([
-		gradeStore.getCourses(),
-		studentStore.getStudents(),
-		gradeStore.getGrades(),
-	]);
-};
+await Promise.all([
+	gradeStore.getCourses(),
+	studentStore.getStudents(),
+	gradeStore.getGrades(),
+]);
 
-onMounted(() => {
-	fetchData();
+const actualGradesData = computed(() => {
+	return gradeStore.grades;
 });
-
-const customers = ref();
 </script>
 
 <template>
 	<div class="card">
 		<DataTable
-			:value="customers"
+			:value="actualGradesData"
 			paginator
 			:rows="5"
-			:rowsPerPageOptions="[5, 10, 20, 50]"
+			:rowsPerPageOptions="[5, 10, 15]"
 			tableStyle="min-width: 50rem"
 			paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 			currentPageReportTemplate="{first} to {last} of {totalRecords}"
@@ -40,14 +35,18 @@ const customers = ref();
 			<template #paginatorend>
 				<Button type="button" icon="pi pi-download" text />
 			</template>
-			<Column field="name" header="Name" style="width: 25%"></Column>
-			<Column field="country.name" header="Country" style="width: 25%"></Column>
-			<Column field="company" header="Company" style="width: 25%"></Column>
-			<Column
-				field="representative.name"
-				header="Representative"
+			<Column field="code" header="Code" style="width: 25%"></Column>
+			<!-- <Column
+				field="courseName"
+				header="Course name"
 				style="width: 25%"
-			></Column>
+			></Column> -->
+			<!-- <Column
+				field="studentName"
+				header="Student name"
+				style="width: 25%"
+			></Column> -->
+			<Column field="grade" header="Grade" style="width: 25%"></Column>
 		</DataTable>
 	</div>
 </template>
