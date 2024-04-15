@@ -2,11 +2,14 @@
 import BigMenu from './BigMenu.vue';
 //import MinMenu from './MinMenu.vue';
 import SidePanel from './SidePanel.vue';
+import { useAuthStore } from '../store/modules/auth';
 
 defineProps({
 	toggleTheme: Function,
 	themeIco: String,
 });
+
+const authStor = useAuthStore();
 </script>
 
 <template>
@@ -131,6 +134,7 @@ defineProps({
 					severity="secondary"
 					outlined
 				></Button>
+				<span class="font-bold big-screen-center"> {{ authStor.user }}</span>
 				<Avatar
 					icon="pi pi-user"
 					class="mr-2"

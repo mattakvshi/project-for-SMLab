@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { createPinia } from 'pinia';
 import router from './router';
 import PrimeVue from 'primevue/config';
+import { createPinia } from 'pinia';
 
 import Button from 'primevue/button';
 import Toolbar from 'primevue/toolbar';
@@ -27,6 +27,7 @@ import '/node_modules/primeflex/primeflex.css';
 
 const app = createApp(App);
 
+// Инициировать Pinia
 const pinia = createPinia();
 app.use(pinia);
 

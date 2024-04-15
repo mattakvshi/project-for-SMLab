@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../store/modules/auth';
 
 const visible = ref(false);
 
 const router = useRouter();
+const authStor = useAuthStore();
 
 const pushToGrades = () => {
 	router.push('/');
@@ -83,7 +85,7 @@ const pushToSecond = () => {
 								style="background-color: #ece9fc; color: #2a1261"
 								shape="circle"
 							/>
-							<span class="font-bold">Amy Elsner</span>
+							<span class="font-bold"> {{ authStor.user }}</span>
 						</a>
 					</div>
 				</div>
