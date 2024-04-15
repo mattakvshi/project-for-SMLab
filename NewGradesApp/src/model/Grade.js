@@ -1,7 +1,10 @@
-import store from '../store';
+import { useGradeStore } from '../store/modules/grade';
+import { useStudentStore } from '../store/modules/student';
 import Formatter from '../utils/Formatter';
 
 export default class Grade {
+	gradeStore = useGradeStore();
+	useStudentStore = useStudentStore();
 	code;
 	courseCode;
 	studentCode;
@@ -19,11 +22,11 @@ export default class Grade {
 	}
 
 	get courseName() {
-		return store.state.grade.courses.get(this.courseCode).name;
+		return this.gradeStore.courses.get(this.courseCode).name;
 	}
 
 	get studentName() {
-		return store.state.student.students.get(this.studentCode).fullName;
+		return this.studentStore.students.get(this.studentCode).fullName;
 	}
 
 	get formatGradeDate() {

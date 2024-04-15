@@ -7,11 +7,11 @@ export const useLoadingStore = defineStore('loading', {
 	}),
 
 	actions: {
-		toggleDrawer(state) {
-			state.drawer = !state.drawer;
+		toggleDrawer() {
+			this.drawer = !this.drawer;
 		},
-		setIsLoading(state, flag) {
-			state.isLoading = flag;
+		setIsLoading(flag) {
+			this.isLoading = flag;
 		},
 	},
 });

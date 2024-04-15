@@ -84,7 +84,8 @@ class RequestExecutor {
 	 */
 
 	async execute(url, exact, init, data) {
-		if (this.loadingMask) store.commit('setIsLoading', true);
+		const loadingStore = useLoadingStore();
+		if (this.loadingMask) loadingStore.setIsLoading(true);
 
 		try {
 			if (data) init = { ...init, body: JSON.stringify(data) };
@@ -98,7 +99,7 @@ class RequestExecutor {
 			console.error(error);
 			throw new Error(error);
 		} finally {
-			useLoadingStore.setIsLoading(false);
+			loadingStore.setIsLoading(false);
 		}
 	}
 }

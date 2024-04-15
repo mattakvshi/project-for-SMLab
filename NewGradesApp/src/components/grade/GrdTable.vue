@@ -1,11 +1,24 @@
 <script setup>
 import Toolbar from 'primevue/toolbar';
 import { ref, onMounted } from 'vue';
-//import { CustomerService } from '@/service/CustomerService';
 
-// onMounted(() => {
-// 	CustomerService.getCustomersMedium().then(data => (customers.value = data));
-// });
+import { useStudentStore } from '../../store/modules/student';
+import { useGradeStore } from '../../store/modules/grade';
+
+const studentStore = useStudentStore();
+const gradeStore = useGradeStore();
+
+const fetchData = async () => {
+	await Promise.all([
+		gradeStore.getCourses(),
+		studentStore.getStudents(),
+		gradeStore.getGrades(),
+	]);
+};
+
+onMounted(() => {
+	fetchData();
+});
 
 const customers = ref();
 </script>
