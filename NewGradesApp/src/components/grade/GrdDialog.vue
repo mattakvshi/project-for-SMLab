@@ -1,3 +1,24 @@
+<script setup>
+import { ref } from 'vue';
+
+const visible = ref(false);
+
+//Data
+const course = ref(null);
+const student = ref(null);
+const grade = ref(null);
+
+const selectedCities = ref();
+const cities = ref([
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+]);
+</script>
+
+
 <template>
 	<div class="card flex justify-content-center">
 		<Button
@@ -12,19 +33,29 @@
 			:style="{ width: '25rem' }"
 		>
 			<span class="p-text-secondary block mb-5"
-				>Add all information on student.</span
+				>Add all information of student.</span
 			>
-			<div class="flex align-items-center gap-3 mb-3">
-				<label for="course" class="font-semibold w-6rem">Course</label>
-				<InputText id="course" class="flex-auto" autocomplete="off" />
+			<div class="flex align-items-center gap-3 mb-5">
+				<FloatLabel>
+					<!-- <InputText id="course" v-model="course" class="flex-auto" autocomplete="off" /> -->
+					<MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select course"
+            :maxSelectedLabels="1" class="w-full md:w-20rem" />
+					<label for="course" class="font-semibold w-6rem">Course</label>
+				</FloatLabel>
 			</div>
 			<div class="flex align-items-center gap-3 mb-5">
-				<label for="student" class="font-semibold w-6rem">Student</label>
-				<InputText id="student" class="flex-auto" autocomplete="off" />
+				<FloatLabel>
+					<!-- <InputText id="student" v-model="student" class="flex-auto" autocomplete="off" /> -->
+					<MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select student"
+            :maxSelectedLabels="1" class="w-full md:w-20rem" />
+					<label for="student" class="font-semibold w-6rem">Student</label>
+				</FloatLabel>
 			</div>
-			<div class="flex align-items-center gap-3 mb-5">
-				<label for="grade" class="font-semibold w-6rem">Grade</label>
-				<InputText id="grade" class="flex-auto" autocomplete="off" />
+			<div class="flex align-items-center gap-3 mb-5" :style="{ width: '20rem' }">
+				<FloatLabel :style="{ width: '20rem' }">
+					<InputNumber id="grade"  v-model="grade" class="flex-auto" autocomplete="off" inputId="minmax-buttons" showButtons :min="1" :max="25" :style="{ width: '20rem' }"/>
+					<label for="grade" class="font-semibold w-6rem" :style="{ width: '20rem' }">Grade</label>
+				</FloatLabel>
 			</div>
 			<div class="flex justify-content-end gap-2">
 				<Button
@@ -39,8 +70,9 @@
 	</div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
 
-const visible = ref(false);
-</script>
+<style scoped>
+.w-100{
+	width: 100px;
+}
+</style>

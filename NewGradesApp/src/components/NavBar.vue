@@ -1,6 +1,6 @@
 <script setup>
 import BigMenu from './BigMenu.vue';
-// import MinMenu from './MinMenu.vue';
+//import MinMenu from './MinMenu.vue';
 import SidePanel from './SidePanel.vue';
 
 defineProps({
@@ -154,13 +154,13 @@ defineProps({
 	height: 40px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1100px) {
 	.big-screen-center {
 		display: none;
 	}
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1100px) {
 	.small-screen-center {
 		display: none;
 	}
