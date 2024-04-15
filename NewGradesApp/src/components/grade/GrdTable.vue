@@ -1,3 +1,15 @@
+<script setup>
+import Toolbar from 'primevue/toolbar';
+import { ref, onMounted } from 'vue';
+//import { CustomerService } from '@/service/CustomerService';
+
+// onMounted(() => {
+// 	CustomerService.getCustomersMedium().then(data => (customers.value = data));
+// });
+
+const customers = ref();
+</script>
+
 <template>
 	<div class="card">
 		<DataTable
@@ -26,17 +38,5 @@
 		</DataTable>
 	</div>
 </template>
-
-<script setup>
-import Toolbar from 'primevue/toolbar';
-import { ref, onMounted } from 'vue';
-//import { CustomerService } from '@/service/CustomerService';
-
-// onMounted(() => {
-// 	CustomerService.getCustomersMedium().then(data => (customers.value = data));
-// });
-
-const customers = ref();
-</script>
 
 <style scoped></style>

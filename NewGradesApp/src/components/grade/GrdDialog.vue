@@ -1,23 +1,48 @@
 <script setup>
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
+import { useToast } from 'primevue/usetoast';
+
+const toast = inject('toast');
+
+const toastInstance = useToast(toast);
+
+const showInfo = () => {
+	toastInstance.add({
+		severity: 'info',
+		summary: 'Adding info',
+		detail: 'Adding a new grade has been canceled',
+		life: 3000,
+	});
+};
 
 const visible = ref(false);
 
+const cancelClick = () => {
+	visible.value = false;
+	showInfo();
+};
+
 //Data
-const course = ref(null);
-const student = ref(null);
+const selectedCourse = ref();
+const selectedStudent = ref();
 const grade = ref(null);
 
-const selectedCities = ref();
-const cities = ref([
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' }
+const student = ref([
+	{ name: 'New York', code: 'NY' },
+	{ name: 'Rome', code: 'RM' },
+	{ name: 'London', code: 'LDN' },
+	{ name: 'Istanbul', code: 'IST' },
+	{ name: 'Paris', code: 'PRS' },
+]);
+
+const course = ref([
+	{ name: 'New York', code: 'NY' },
+	{ name: 'Rome', code: 'RM' },
+	{ name: 'London', code: 'LDN' },
+	{ name: 'Istanbul', code: 'IST' },
+	{ name: 'Paris', code: 'PRS' },
 ]);
 </script>
-
 
 <template>
 	<div class="card flex justify-content-center">
@@ -38,23 +63,55 @@ const cities = ref([
 			<div class="flex align-items-center gap-3 mb-5">
 				<FloatLabel>
 					<!-- <InputText id="course" v-model="course" class="flex-auto" autocomplete="off" /> -->
-					<MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select course"
-            :maxSelectedLabels="1" class="w-full md:w-20rem" />
+					<MultiSelect
+						v-model="selectedCourse"
+						:options="course"
+						filter
+						optionLabel="name"
+						placeholder="Select course"
+						:maxSelectedLabels="1"
+						class="w-full md:w-20rem"
+					/>
 					<label for="course" class="font-semibold w-6rem">Course</label>
 				</FloatLabel>
 			</div>
 			<div class="flex align-items-center gap-3 mb-5">
 				<FloatLabel>
 					<!-- <InputText id="student" v-model="student" class="flex-auto" autocomplete="off" /> -->
-					<MultiSelect v-model="selectedCities" :options="cities" filter optionLabel="name" placeholder="Select student"
-            :maxSelectedLabels="1" class="w-full md:w-20rem" />
+					<MultiSelect
+						v-model="selectedStudent"
+						:options="student"
+						filter
+						optionLabel="name"
+						placeholder="Select student"
+						:maxSelectedLabels="1"
+						class="w-full md:w-20rem"
+					/>
 					<label for="student" class="font-semibold w-6rem">Student</label>
 				</FloatLabel>
 			</div>
-			<div class="flex align-items-center gap-3 mb-5" :style="{ width: '20rem' }">
+			<div
+				class="flex align-items-center gap-3 mb-5"
+				:style="{ width: '20rem' }"
+			>
 				<FloatLabel :style="{ width: '20rem' }">
-					<InputNumber id="grade"  v-model="grade" class="flex-auto" autocomplete="off" inputId="minmax-buttons" showButtons :min="1" :max="25" :style="{ width: '20rem' }"/>
-					<label for="grade" class="font-semibold w-6rem" :style="{ width: '20rem' }">Grade</label>
+					<InputNumber
+						id="grade"
+						v-model="grade"
+						class="flex-auto"
+						autocomplete="off"
+						inputId="minmax-buttons"
+						showButtons
+						:min="1"
+						:max="25"
+						:style="{ width: '20rem' }"
+					/>
+					<label
+						for="grade"
+						class="font-semibold w-6rem"
+						:style="{ width: '20rem' }"
+						>Grade</label
+					>
 				</FloatLabel>
 			</div>
 			<div class="flex justify-content-end gap-2">
@@ -62,7 +119,7 @@ const cities = ref([
 					type="button"
 					label="Cancel"
 					severity="secondary"
-					@click="visible = false"
+					@click="cancelClick"
 				></Button>
 				<Button type="button" label="Save" @click="visible = false"></Button>
 			</div>
@@ -70,9 +127,8 @@ const cities = ref([
 	</div>
 </template>
 
-
 <style scoped>
-.w-100{
+.w-100 {
 	width: 100px;
 }
 </style>

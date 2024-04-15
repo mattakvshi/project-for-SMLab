@@ -1,9 +1,13 @@
 <script setup>
 import { usePrimeVue } from 'primevue/config';
 import NavBar from './components/NavBar.vue';
-import { ref, watch } from 'vue';
+import { provide, ref, watch } from 'vue';
 
 const PrimeVue = usePrimeVue();
+
+const toast = ref(null);
+
+provide('toast', toast);
 
 const isDarkTheme = ref(false);
 
@@ -28,6 +32,7 @@ watch(isDarkTheme, newValue => {
 </script>
 
 <template>
+	<Toast ref="toast" position="bottom-right" />
 	<NavBar :toggleTheme="toggleTheme" :themeIco="themeIco" />
 	<router-view></router-view>
 </template>

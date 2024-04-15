@@ -12,10 +12,11 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Sidebar from 'primevue/sidebar';
 import Dialog from 'primevue/dialog';
-import InputText from 'primevue/inputtext';
 import FloatLabel from 'primevue/floatlabel';
 import InputNumber from 'primevue/inputnumber';
 import MultiSelect from 'primevue/multiselect';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 
 import './assets/app.css';
 //import 'primevue/resources/themes/aura-light-purple/theme.css';
@@ -38,10 +39,11 @@ app.component('DataTable', DataTable);
 app.component('Column', Column);
 app.component('Sidebar', Sidebar);
 app.component('Dialog', Dialog);
-app.component('InputText', InputText);
 app.component('FloatLabel', FloatLabel);
 app.component('InputNumber', InputNumber);
 app.component('MultiSelect', MultiSelect);
+app.component('Toast', Toast);
+app.use(ToastService);
 
 app.use(router);
 

@@ -1,3 +1,20 @@
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const visible = ref(false);
+
+const router = useRouter();
+
+const pushToGrades = () => {
+	router.push('/');
+};
+
+const pushToSecond = () => {
+	router.push('/second');
+};
+</script>
+
 <template>
 	<div class="card flex justify-content-center">
 		<Sidebar v-model:visible="visible">
@@ -75,20 +92,3 @@
 		<Button icon="pi pi-bars" @click="visible = true" />
 	</div>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
-const visible = ref(false);
-
-const router = useRouter();
-
-const pushToGrades = () => {
-	router.push('/');
-};
-
-const pushToSecond = () => {
-	router.push('/second');
-};
-</script>
