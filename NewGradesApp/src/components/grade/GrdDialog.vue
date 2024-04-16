@@ -1,6 +1,7 @@
 <script setup>
-import { inject, ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
+import { useGradeStore } from '../../store/modules/grade';
 
 const toast = inject('toast');
 
@@ -16,6 +17,7 @@ const showInfo = () => {
 };
 
 const visible = ref(false);
+const gradeStore = useGradeStore();
 
 const cancelClick = () => {
 	visible.value = false;
@@ -27,21 +29,25 @@ const selectedCourse = ref();
 const selectedStudent = ref();
 const grade = ref(null);
 
-const student = ref([
-	{ name: 'New York', code: 'NY' },
-	{ name: 'Rome', code: 'RM' },
-	{ name: 'London', code: 'LDN' },
-	{ name: 'Istanbul', code: 'IST' },
-	{ name: 'Paris', code: 'PRS' },
-]);
+const student = computed(() => {
+	return gradeStore.grades.map(grade => ({
+		name: grade.studentName,
+		code: grade.code,
+	}));
+});
 
-const course = ref([
-	{ name: 'New York', code: 'NY' },
-	{ name: 'Rome', code: 'RM' },
-	{ name: 'London', code: 'LDN' },
-	{ name: 'Istanbul', code: 'IST' },
-	{ name: 'Paris', code: 'PRS' },
-]);
+const course = computed(() => {
+	const courseMap = new Map();
+	gradeStore.grades.forEach(grade => {
+		courseMap.set(grade.courseCode, {
+			// Используем courseCode в к к качестве ключа
+			name: grade.courseName,
+			code: grade.courseCode,
+		});
+	});
+
+	return [...courseMap.values()];
+});
 </script>
 
 <template>
@@ -69,7 +75,7 @@ const course = ref([
 						filter
 						optionLabel="name"
 						placeholder="Select course"
-						:maxSelectedLabels="1"
+						:maxSelectedLabels="2"
 						class="w-full md:w-20rem"
 					/>
 					<label for="course" class="font-semibold w-6rem">Course</label>

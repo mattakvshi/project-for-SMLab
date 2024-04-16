@@ -59,6 +59,21 @@ const reloadGrade = () => {
 
 const selectedGrade = ref();
 const metaKey = ref(true);
+
+// Вычисляемое свойство для определения количества строк на странице
+const calculatedRowsPerPage = computed(() => {
+	return Math.ceil(actualGradesData.value.length * 0.7);
+});
+
+// Вычисляемое свойство для определения вариантов количества строк на странице
+const calculatedRowsPerPageOptions = computed(() => {
+	const totalRecords = actualGradesData.value.length;
+	return [
+		Math.ceil(totalRecords * 0.3),
+		Math.ceil(totalRecords * 0.7),
+		totalRecords,
+	];
+});
 </script>
 
 <template>
@@ -72,8 +87,8 @@ const metaKey = ref(true);
 					selectionMode="single"
 					:metaKeySelection="metaKey"
 					paginator
-					:rows="10"
-					:rowsPerPageOptions="[5, 10, 15]"
+					:rows="calculatedRowsPerPage"
+					:rowsPerPageOptions="calculatedRowsPerPageOptions"
 					tableStyle="min-width: 35rem;"
 					paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 					currentPageReportTemplate="{first} to {last} of {totalRecords}"
