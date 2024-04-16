@@ -14,7 +14,7 @@ const INIT = {
 
 class RequestExecutor {
 	//TODO: Cancel request
-	constructor() {
+	constructor(toastInstance) {
 		this.baseUrl = '';
 		this.loadingMask = true; //отключать, если не требуется глобальная маска
 		console.info('Request Executor Init!');

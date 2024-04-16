@@ -59,24 +59,32 @@ export const useGradeStore = defineStore('grade', {
 		},
 
 		async deleteGrade(grade) {
-			if (!(await api.deleteGrade(grade.code)).resultCode) {
-				grade.isDelete = 1;
-				this.grades.splice(this.grades.indexOf(grade), 1, grade);
+			try {
+				if (!(await api.deleteGrade(grade.code)).resultCode) {
+					grade.isDelete = 1;
+					this.grades.splice(this.grades.indexOf(grade), 1, grade);
+				}
+			} catch (error) {
+				throw error;
 			}
 		},
 
 		async initData() {
-			this.grades = (await api.initData()).map(
-				grade =>
-					new Grade(
-						grade.code,
-						grade.courseCode,
-						grade.studentCode,
-						grade.grade,
-						grade.gradeDate,
-						grade.isDelete
-					)
-			);
+			try {
+				this.grades = (await api.initData()).map(
+					grade =>
+						new Grade(
+							grade.code,
+							grade.courseCode,
+							grade.studentCode,
+							grade.grade,
+							grade.gradeDate,
+							grade.isDelete
+						)
+				);
+			} catch (error) {
+				throw error;
+			}
 		},
 	},
 });

@@ -21,7 +21,7 @@ export default class Grade {
 
 	get courseName() {
 		const gradeStore = useGradeStore();
-		console.log( gradeStore.courses.get(this.courseCode));
+		//console.log( gradeStore.courses.get(this.courseCode));
 		return gradeStore.courses.get(this.courseCode).name;
 	}
 

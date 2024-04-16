@@ -9,16 +9,61 @@ const endpoints = {
 };
 
 export default {
-	course: () => ReqExec.get(endpoints.course),
+	course: () => {
+		try {
+			return ReqExec.get(endpoints.course);
+		} catch (error) {
+			throw error; // Перебросить ошибку для дальнейшей обработки
+		}
+	},
 
-	student: () => ReqExec.get(endpoints.student),
+	student: () => {
+		try {
+			return ReqExec.get(endpoints.student);
+		} catch (error) {
+			throw error;
+		}
+	},
 
-	grade: () => ReqExec.get(endpoints.grade),
-	postGrade: grade => ReqExec.post(endpoints.grade, grade),
-	putGrade: (code, grade) => ReqExec.put(endpoints.grade, code, grade),
-	deleteGrade: code => ReqExec.delete(endpoints.grade, code),
+	grade: () => {
+		try {
+			return ReqExec.get(endpoints.grade);
+		} catch (error) {
+			throw error;
+		}
+	},
 
-	initData: () => ReqExec.get(endpoints.init),
+	postGrade: grade => {
+		try {
+			return ReqExec.post(endpoints.grade, grade);
+		} catch (error) {
+			throw error;
+		}
+	},
+
+	putGrade: (code, grade) => {
+		try {
+			return ReqExec.put(endpoints.grade, code, grade);
+		} catch (error) {
+			throw error;
+		}
+	},
+
+	deleteGrade: code => {
+		try {
+			return ReqExec.delete(endpoints.grade, code);
+		} catch (error) {
+			throw error;
+		}
+	},
+
+	initData: () => {
+		try {
+			return ReqExec.get(endpoints.init);
+		} catch (error) {
+			throw error;
+		}
+	},
 
 	//аутентификация, не изменять
 	auth: {
