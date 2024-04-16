@@ -3,38 +3,32 @@ import { computed, inject, ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useGradeStore } from '../../store/modules/grade';
 import { useLoadingStore } from '../../store/modules/loading';
+import Grade from '../../model/Grade';
 
 const loadingStore = useLoadingStore();
+const visible = ref(false);
+const gradeStore = useGradeStore();
+const toast = inject('toast');
+const toastInstance = useToast(toast);
 
 const isDataLoaded = computed(() => {
 	return loadingStore.isLoading;
 });
 
-const toast = inject('toast');
-
-const toastInstance = useToast(toast);
-
-const showInfo = () => {
+const showInfo = (severity, summary, detail) => {
 	toastInstance.add({
-		severity: 'info',
-		summary: 'Adding info',
-		detail: 'Adding a new grade has been canceled',
+		severity: severity,
+		summary: summary,
+		detail: detail,
 		life: 3000,
 	});
-};
-
-const visible = ref(false);
-const gradeStore = useGradeStore();
-
-const cancelClick = () => {
-	visible.value = false;
-	showInfo();
 };
 
 //Data
 const selectedCourse = ref();
 const selectedStudent = ref();
 const grade = ref(null);
+const newGrade = new Grade(null, null, null, null, null, 0);
 
 const student = computed(() => {
 	return gradeStore.grades.map(grade => ({
@@ -67,6 +61,41 @@ const isStudentSelected = computed(() => {
 const isGrade = computed(() => {
 	return !!grade.value;
 });
+
+const cancelClick = () => {
+	init();
+	visible.value = false;
+	showInfo('info', 'Adding info', 'Adding a new grade has been canceled');
+};
+
+const saveClick = () => {
+	try {
+		if (grade && selectedCourse && selectedStudent) {
+			newGrade.grade = new Number(grade.value);
+			newGrade.courseCode = selectedCourse.value.code;
+			newGrade.studentCode = selectedStudent.value.code;
+			gradeStore.postGrade(newGrade);
+			showInfo(
+				'success',
+				'Adding success',
+				'Adding a new grade has been successfully.'
+			);
+		} else {
+			throw error;
+		}
+	} catch (error) {
+		showInfo('Error', 'Adding error', 'Adding a new grade has been errored.');
+	} finally {
+		visible.value = false;
+		init();
+	}
+};
+
+const init = () => {
+	grade.value = null;
+	selectedCourse.value = null;
+	selectedStudent.value = null;
+};
 </script>
 
 <template>
@@ -153,7 +182,7 @@ const isGrade = computed(() => {
 				<Button
 					type="button"
 					label="Save"
-					@click="visible = false"
+					@click="saveClick"
 					:disabled="!isGrade || !isCourseSelected || !isStudentSelected"
 				></Button>
 			</div>
