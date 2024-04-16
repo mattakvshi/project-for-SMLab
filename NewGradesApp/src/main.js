@@ -18,8 +18,10 @@ import MultiSelect from 'primevue/multiselect';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 import ProgressSpinner from 'primevue/progressspinner';
+import Card from 'primevue/card';
 
 import './assets/app.css';
+//Темы перенесены в public для работы PrimeVue.changeTheme()
 //import 'primevue/resources/themes/aura-light-purple/theme.css';
 //import 'primevue/resources/themes/aura-dark-purple/theme.css';
 import 'primevue/resources/primevue.min.css';
@@ -47,6 +49,7 @@ app.component('MultiSelect', MultiSelect);
 app.component('Toast', Toast);
 app.use(ToastService);
 app.component('ProgressSpinner', ProgressSpinner);
+app.component('Card', Card);
 
 app.use(router);
 

@@ -19,36 +19,64 @@ const actualGradesData = computed(() => {
 </script>
 
 <template>
-	<div class="card">
-		<DataTable
-			:value="actualGradesData"
-			paginator
-			:rows="5"
-			:rowsPerPageOptions="[5, 10, 15]"
-			tableStyle="min-width: 50rem"
-			paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-			currentPageReportTemplate="{first} to {last} of {totalRecords}"
-		>
-			<template #paginatorstart>
-				<Button type="button" icon="pi pi-refresh" text />
+	<div class="card" style="padding: 1rem 3rem">
+		<Card>
+			<template #content>
+				<DataTable
+					:value="actualGradesData"
+					paginator
+					:rows="10"
+					:rowsPerPageOptions="[5, 10, 15]"
+					tableStyle="min-width: 50rem"
+					paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+					currentPageReportTemplate="{first} to {last} of {totalRecords}"
+					removableSort
+				>
+					<template #paginatorstart>
+						<Button
+							class="mt-3"
+							label="Reload grades data"
+							type="button"
+							icon="pi pi-refresh"
+							text
+							outlined
+						/>
+					</template>
+					<template #paginatorend> </template>
+					<Column
+						sortable
+						field="code"
+						header="Code"
+						style="width: 15%"
+					></Column>
+					<Column
+						sortable
+						field="courseName"
+						header="Course name"
+						style="width: 15%"
+					></Column>
+					<Column
+						sortable
+						field="studentName"
+						header="Student name"
+						style="width: 15%"
+					></Column>
+					<Column
+						sortable
+						field="grade"
+						header="Grade"
+						style="width: 15%"
+					></Column>
+					<Column
+						sortable
+						field="formatGradeDate"
+						header="Date"
+						style="width: 15%"
+					></Column>
+					<Column field="" header="Delete" style="width: 15%"> </Column>
+				</DataTable>
 			</template>
-			<template #paginatorend>
-				<Button type="button" icon="pi pi-download" text />
-			</template>
-			<Column field="code" header="Code" style="width: 25%"></Column>
-			<Column
-				field="courseName"
-				header="Course name"
-				style="width: 25%"
-			></Column>
-			<Column
-				field="studentName"
-				header="Student name"
-				style="width: 25%"
-			></Column>
-			<Column field="grade" header="Grade" style="width: 25%"></Column>
-			<Column field="formatGradeDate" header="Date" style="width: 25%"></Column>
-		</DataTable>
+		</Card>
 	</div>
 </template>
 

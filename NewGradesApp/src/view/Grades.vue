@@ -10,10 +10,7 @@ import GrdDialog from '../components/grade/GrdDialog.vue';
 	</div>
 
 	<Suspense>
-		<!-- component with nested async dependencies -->
 		<grd-table></grd-table>
-
-		<!-- loading state via #fallback slot -->
 		<template #fallback>
 			<div
 				class="card flex justify-content-center align-items-center"
