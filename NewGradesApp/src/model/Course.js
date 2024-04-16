@@ -1,12 +1,12 @@
 export default class Course {
     #code
-    #name
+    name
     #dateStart
     #dateEnd
 
     constructor(code, name, dateStart, dateEnd) {
         this.#code = code;
-        this.#name = name;
+        this.name = name;
         this.#dateStart = dateStart;
         this.#dateEnd = dateEnd;
     }
@@ -19,10 +19,11 @@ export default class Course {
     }
 
     get name() {
-        return this.#name;
+        return this.name;
     }
+
     set name(name) {
-        this.#name = name;
+        this.name = name;
     }
 
     get dateStart() {

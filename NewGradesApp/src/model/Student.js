@@ -1,11 +1,11 @@
 export default class Student {
     #code
-    #fullName
+    fullName
     #dateTime
 
     constructor(code, fullName, dateTime) {
         this.#code = code;
-        this.#fullName = fullName;
+        this.fullName = fullName;
         this.#dateTime = dateTime;
     }
 
@@ -17,10 +17,10 @@ export default class Student {
     }
 
     get fullName() {
-        return this.#fullName;
+        return this.fullName;
     }
     set fullName(fullName) {
-        this.#fullName = fullName;
+        this.fullName = fullName;
     }
 
     get dateTime() {

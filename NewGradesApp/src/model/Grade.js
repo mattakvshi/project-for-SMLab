@@ -3,8 +3,6 @@ import { useStudentStore } from '../store/modules/student';
 import Formatter from '../utils/Formatter';
 
 export default class Grade {
-	gradeStore = useGradeStore();
-	useStudentStore = useStudentStore();
 	code;
 	courseCode;
 	studentCode;
@@ -22,11 +20,14 @@ export default class Grade {
 	}
 
 	get courseName() {
-		return this.gradeStore.courses.get(this.courseCode).name;
+		const gradeStore = useGradeStore();
+		console.log( gradeStore.courses.get(this.courseCode));
+		return gradeStore.courses.get(this.courseCode).name;
 	}
 
 	get studentName() {
-		return this.studentStore.students.get(this.studentCode).fullName;
+		const studentStore = useStudentStore();
+		return studentStore.students.get(this.studentCode).fullName;
 	}
 
 	get formatGradeDate() {

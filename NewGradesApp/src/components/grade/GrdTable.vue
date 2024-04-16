@@ -8,7 +8,7 @@ const studentStore = useStudentStore();
 const gradeStore = useGradeStore();
 
 await Promise.all([
-	gradeStore.getCourses(),
+	gradeStore.getCourses().then(),
 	studentStore.getStudents(),
 	gradeStore.getGrades(),
 ]);
@@ -36,17 +36,18 @@ const actualGradesData = computed(() => {
 				<Button type="button" icon="pi pi-download" text />
 			</template>
 			<Column field="code" header="Code" style="width: 25%"></Column>
-			<!-- <Column
+			<Column
 				field="courseName"
 				header="Course name"
 				style="width: 25%"
-			></Column> -->
-			<!-- <Column
+			></Column>
+			<Column
 				field="studentName"
 				header="Student name"
 				style="width: 25%"
-			></Column> -->
+			></Column>
 			<Column field="grade" header="Grade" style="width: 25%"></Column>
+			<Column field="formatGradeDate" header="Date" style="width: 25%"></Column>
 		</DataTable>
 	</div>
 </template>
