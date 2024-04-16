@@ -158,13 +158,13 @@ const authStor = useAuthStore();
 	height: 40px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1180px) {
 	.big-screen-center {
 		display: none;
 	}
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1180px) {
 	.small-screen-center {
 		display: none;
 	}

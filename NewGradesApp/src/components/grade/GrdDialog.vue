@@ -2,6 +2,13 @@
 import { computed, inject, ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useGradeStore } from '../../store/modules/grade';
+import { useLoadingStore } from '../../store/modules/loading';
+
+const loadingStore = useLoadingStore();
+
+const isDataLoaded = computed(() => {
+	return loadingStore.isLoading;
+});
 
 const toast = inject('toast');
 
@@ -48,6 +55,18 @@ const course = computed(() => {
 
 	return [...courseMap.values()];
 });
+
+const isCourseSelected = computed(() => {
+	return !!selectedCourse.value || selectedCourse.length > 1;
+});
+
+const isStudentSelected = computed(() => {
+	return !!selectedStudent.value || selectedStudent.length > 1;
+});
+
+const isGrade = computed(() => {
+	return !!grade.value;
+});
 </script>
 
 <template>
@@ -56,6 +75,7 @@ const course = computed(() => {
 			icon="pi pi-plus"
 			style="width: 40px; height: 40px"
 			@click="visible = true"
+			:disabled="isDataLoaded"
 		/>
 		<Dialog
 			v-model:visible="visible"
@@ -75,8 +95,9 @@ const course = computed(() => {
 						filter
 						optionLabel="name"
 						placeholder="Select course"
-						:maxSelectedLabels="2"
+						:maxSelectedLabels="1"
 						class="w-full md:w-20rem"
+						:invalid="!isCourseSelected"
 					/>
 					<label for="course" class="font-semibold w-6rem">Course</label>
 				</FloatLabel>
@@ -92,6 +113,7 @@ const course = computed(() => {
 						placeholder="Select student"
 						:maxSelectedLabels="1"
 						class="w-full md:w-20rem"
+						:invalid="!isStudentSelected"
 					/>
 					<label for="student" class="font-semibold w-6rem">Student</label>
 				</FloatLabel>
@@ -111,6 +133,7 @@ const course = computed(() => {
 						:min="1"
 						:max="25"
 						:style="{ width: '20rem' }"
+						:invalid="!isGrade"
 					/>
 					<label
 						for="grade"
@@ -127,7 +150,12 @@ const course = computed(() => {
 					severity="secondary"
 					@click="cancelClick"
 				></Button>
-				<Button type="button" label="Save" @click="visible = false"></Button>
+				<Button
+					type="button"
+					label="Save"
+					@click="visible = false"
+					:disabled="!isGrade || !isCourseSelected || !isStudentSelected"
+				></Button>
 			</div>
 		</Dialog>
 	</div>

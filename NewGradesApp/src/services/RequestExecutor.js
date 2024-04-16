@@ -99,7 +99,9 @@ class RequestExecutor {
 			console.error(error);
 			throw new Error(error);
 		} finally {
-			loadingStore.setIsLoading(false);
+			setTimeout(() => {
+				loadingStore.setIsLoading(false);
+			}, 1000);
 		}
 	}
 }
