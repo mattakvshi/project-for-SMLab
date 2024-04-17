@@ -88,7 +88,9 @@ class RequestExecutor {
 		if (this.loadingMask) loadingStore.setIsLoading(true);
 
 		try {
+			console.log( JSON.stringify(data))
 			if (data) init = { ...init, body: JSON.stringify(data) };
+			console.log(init)
 
 			const location = exact ? url : this.baseUrl + url;
 			const response = await fetch(location, init);

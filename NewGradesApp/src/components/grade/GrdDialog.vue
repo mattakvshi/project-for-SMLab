@@ -71,9 +71,10 @@ const cancelClick = () => {
 const saveClick = () => {
 	try {
 		if (grade && selectedCourse && selectedStudent) {
-			newGrade.grade = new Number(grade.value);
-			newGrade.courseCode = selectedCourse.value.code;
-			newGrade.studentCode = selectedStudent.value.code;
+			newGrade.grade = grade.value;
+			newGrade.courseCode = selectedCourse.value[0].code;
+			newGrade.studentCode = selectedStudent.value[0].code;
+			console.log(newGrade)
 			gradeStore.postGrade(newGrade);
 			showInfo(
 				'success',
