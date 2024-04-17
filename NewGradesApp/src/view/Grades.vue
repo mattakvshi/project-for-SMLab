@@ -3,13 +3,12 @@ import { ref } from 'vue';
 import GrdTable from '../components/grade/GrdTable.vue';
 import GrdDialog from '../components/grade/GrdDialog.vue';
 
-
-const suspenseKey = ref(0); 
+const suspenseKey = ref(0);
 
 const changeKey = () => {
 	suspenseKey.value += 1;
-	console.log(suspenseKey.value)
-}
+	//console.log(suspenseKey.value)
+};
 </script>
 
 <template>

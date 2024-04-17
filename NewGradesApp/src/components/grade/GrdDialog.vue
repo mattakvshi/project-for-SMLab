@@ -12,7 +12,7 @@ const toast = inject('toast');
 const toastInstance = useToast(toast);
 
 defineProps({
-	changeKey: Function, 
+	changeKey: Function,
 });
 
 const isDataLoaded = computed(() => {
@@ -37,11 +37,11 @@ const newGrade = new Grade(null, null, null, null, null, 0);
 const student = computed(() => {
 	const studentMap = new Map();
 
-	 gradeStore.grades.forEach(grade => {
+	gradeStore.grades.forEach(grade => {
 		studentMap.set(grade.studentCode, {
 			name: grade.studentName,
 			code: grade.studentCode,
-		})
+		});
 	});
 
 	return [...studentMap.values()];
@@ -61,22 +61,12 @@ const course = computed(() => {
 });
 
 const isCourseSelected = computed(() => {
-	return !!selectedCourse.value 
+	return !!selectedCourse.value;
 });
 
 const isStudentSelected = computed(() => {
-	return !!selectedStudent.value 
+	return !!selectedStudent.value;
 });
-
-const checkOneStudentSelected = computed(() => {
-	if ( !!selectedStudent.value[1] ) {
-		isOneStudentSelected.value = false;
-		console.log(isOneStudentSelected)
-	}
-
-})
-
-const isOneStudentSelected = ref(true)
 
 const isGrade = computed(() => {
 	return !!grade.value;
@@ -106,7 +96,11 @@ const saveClick = () => {
 			throw error;
 		}
 	} catch (error) {
-		showInfo('error', 'Adding error', 'Adding a new grade has been errored. ' + error);
+		showInfo(
+			'error',
+			'Adding error',
+			'Adding a new grade has been errored. ' + error
+		);
 	} finally {
 		visible.value = false;
 		init();
@@ -163,8 +157,9 @@ const init = () => {
 						optionLabel="name"
 						placeholder="Select student"
 						:maxSelectedLabels="1"
+						:selectionLimit="1"
 						class="w-full md:w-20rem"
-						:invalid="!isStudentSelected || isOneStudentSelected"
+						:invalid="!isStudentSelected"
 					/>
 					<label for="student" class="font-semibold w-6rem">Student</label>
 				</FloatLabel>

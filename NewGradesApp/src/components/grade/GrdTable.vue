@@ -34,6 +34,7 @@ const actualGradesData = computed(() => {
 const deleteGrade = () => {
 	try {
 		gradeStore.deleteGrade(selectedGrade.value);
+		selectedGrade.value = null;
 		showInfo(
 			'success',
 			'Grade Deleted',
@@ -59,6 +60,10 @@ const reloadGrade = () => {
 
 const selectedGrade = ref();
 const metaKey = ref(true);
+
+const isGradeSelected = computed(() => {
+	return !!selectedGrade.value;
+});
 
 // Вычисляемое свойство для определения количества строк на странице
 const calculatedRowsPerPage = computed(() => {
@@ -96,9 +101,19 @@ const calculatedRowsPerPageOptions = computed(() => {
 				>
 					<template #paginatorstart>
 						<Button
+							v-if="!actualGradesData.length"
 							@click="reloadGrade"
 							class="mt-3"
 							title="Reload grades data"
+							type="button"
+							icon="pi pi-refresh"
+							text
+							outlined
+						/>
+						<Button
+							v-else
+							style="opacity: 0"
+							class="mt-3"
 							type="button"
 							icon="pi pi-refresh"
 							text
@@ -114,6 +129,7 @@ const calculatedRowsPerPageOptions = computed(() => {
 							icon="pi pi-trash"
 							text
 							outlined
+							:disabled="!isGradeSelected"
 						/>
 					</template>
 					<Column
