@@ -100,10 +100,11 @@ class RequestExecutor {
 		} catch (error) {
 			console.error(error);
 			throw new Error(error);
-		} finally {
-			setTimeout(() => {
-				loadingStore.setIsLoading(false);
-			}, 1000);
+			//Вынес это В onMounted() таблицы грейдов, так как маска снималась раньше, чем монтировался компонент
+			// } finally {
+			// 	setTimeout(() => {
+			// 		loadingStore.setIsLoading(false);
+			// 	}, 1000);
 		}
 	}
 }

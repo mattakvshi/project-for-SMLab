@@ -1,9 +1,10 @@
 <script setup>
-import { ref, computed, inject } from 'vue';
+import { ref, computed, inject, onMounted, h } from 'vue';
 
 import { useStudentStore } from '../../store/modules/student';
 import { useGradeStore } from '../../store/modules/grade';
 import { useToast } from 'primevue/usetoast';
+import { useLoadingStore } from '../../store/modules/loading';
 
 const toast = inject('toast');
 
@@ -17,6 +18,12 @@ const showInfo = (severity, summary, detail) => {
 		life: 3000,
 	});
 };
+
+const loadingStore = useLoadingStore();
+
+onMounted(() => {
+	loadingStore.setIsLoading(false);
+});
 
 const studentStore = useStudentStore();
 const gradeStore = useGradeStore();
@@ -79,6 +86,12 @@ const calculatedRowsPerPageOptions = computed(() => {
 		totalRecords,
 	];
 });
+
+const onCellEditComplete = event => {
+	let { data, newValue, field } = event;
+	if (newValue) data[field] = newValue;
+	else event.preventDefault();
+};
 </script>
 
 <template>
@@ -98,6 +111,8 @@ const calculatedRowsPerPageOptions = computed(() => {
 					paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 					currentPageReportTemplate="{first} to {last} of {totalRecords}"
 					removableSort
+					editMode="cell"
+					@cell-edit-complete="onCellEditComplete"
 				>
 					<template #paginatorstart>
 						<Button
@@ -150,12 +165,22 @@ const calculatedRowsPerPageOptions = computed(() => {
 						header="Student name"
 						style="width: 25%"
 					></Column>
-					<Column
-						sortable
-						field="grade"
-						header="Grade"
-						style="width: 10%"
-					></Column>
+					<Column sortable field="grade" header="Grade" style="width: 25%">
+						<template #body="{ data, field }">
+							{{ data[field] }}
+						</template>
+						<template #editor="{ data, field }">
+							<InputNumber
+								v-model="data[field]"
+								autofocus
+								class="flex-auto"
+								inputId="minmax-buttons"
+								showButtons
+								:min="1"
+								:max="25"
+							/>
+						</template>
+					</Column>
 					<Column
 						sortable
 						field="formatGradeDate"
