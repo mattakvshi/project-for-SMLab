@@ -11,6 +11,10 @@ const gradeStore = useGradeStore();
 const toast = inject('toast');
 const toastInstance = useToast(toast);
 
+defineProps({
+	changeKey: Function, 
+});
+
 const isDataLoaded = computed(() => {
 	return loadingStore.isLoading;
 });
@@ -33,7 +37,7 @@ const newGrade = new Grade(null, null, null, null, null, 0);
 const student = computed(() => {
 	return gradeStore.grades.map(grade => ({
 		name: grade.studentName,
-		code: grade.code,
+		code: grade.studentCode,
 	}));
 });
 
@@ -74,8 +78,9 @@ const saveClick = () => {
 			newGrade.grade = grade.value;
 			newGrade.courseCode = selectedCourse.value[0].code;
 			newGrade.studentCode = selectedStudent.value[0].code;
-			console.log(newGrade)
+			//console.log(newGrade)
 			gradeStore.postGrade(newGrade);
+			//changeKey();
 			showInfo(
 				'success',
 				'Adding success',
@@ -85,7 +90,7 @@ const saveClick = () => {
 			throw error;
 		}
 	} catch (error) {
-		showInfo('Error', 'Adding error', 'Adding a new grade has been errored.');
+		showInfo('error', 'Adding error', 'Adding a new grade has been errored. ' + error);
 	} finally {
 		visible.value = false;
 		init();
@@ -184,6 +189,7 @@ const init = () => {
 					type="button"
 					label="Save"
 					@click="saveClick"
+					@click.prevent="changeKey"
 					:disabled="!isGrade || !isCourseSelected || !isStudentSelected"
 				></Button>
 			</div>

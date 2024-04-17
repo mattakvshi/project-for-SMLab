@@ -40,9 +40,9 @@ export const useGradeStore = defineStore('grade', {
 		},
 
 		async postGrade(grade) {
-			const currentDate = new Date();
-			grade.gradeDate = currentDate.getTime();
-			grade.code = this.grades.at(-1).code + 1;
+			//const currentDate = new Date();
+			//grade.gradeDate = currentDate.getTime();
+			//grade.code = this.grades.at(-1).code + 1;
 			this.grades.push(
 				new Grade(
 					grade.code,
@@ -54,7 +54,7 @@ export const useGradeStore = defineStore('grade', {
 				)
 			);
 
-			console.log(grade)
+			//console.log(grade)
 			await api.postGrade(grade);
 		},
 

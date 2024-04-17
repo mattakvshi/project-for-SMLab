@@ -41,6 +41,7 @@ export default {
         },
 
         postGrade(state, grade) {
+            console.log(grade)
             state.grades.push(
                 new Grade(
                     grade.code,

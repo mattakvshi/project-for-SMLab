@@ -1,15 +1,24 @@
 <script setup>
+import { ref } from 'vue';
 import GrdTable from '../components/grade/GrdTable.vue';
 import GrdDialog from '../components/grade/GrdDialog.vue';
+
+
+const suspenseKey = ref(0); 
+
+const changeKey = () => {
+	suspenseKey.value += 1;
+	console.log(suspenseKey.value)
+}
 </script>
 
 <template>
 	<div class="table-title">
 		<h1>Grades Table</h1>
-		<grd-dialog></grd-dialog>
+		<GrdDialog :changeKey="changeKey" />
 	</div>
 
-	<Suspense>
+	<Suspense :key="suspenseKey">
 		<grd-table></grd-table>
 		<template #fallback>
 			<div
