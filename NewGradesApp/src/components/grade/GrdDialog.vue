@@ -35,10 +35,16 @@ const grade = ref(null);
 const newGrade = new Grade(null, null, null, null, null, 0);
 
 const student = computed(() => {
-	return gradeStore.grades.map(grade => ({
-		name: grade.studentName,
-		code: grade.studentCode,
-	}));
+	const studentMap = new Map();
+
+	 gradeStore.grades.forEach(grade => {
+		studentMap.set(grade.studentCode, {
+			name: grade.studentName,
+			code: grade.studentCode,
+		})
+	});
+
+	return [...studentMap.values()];
 });
 
 const course = computed(() => {
@@ -55,12 +61,22 @@ const course = computed(() => {
 });
 
 const isCourseSelected = computed(() => {
-	return !!selectedCourse.value || selectedCourse.length > 1;
+	return !!selectedCourse.value 
 });
 
 const isStudentSelected = computed(() => {
-	return !!selectedStudent.value || selectedStudent.length > 1;
+	return !!selectedStudent.value 
 });
+
+const checkOneStudentSelected = computed(() => {
+	if ( !!selectedStudent.value[1] ) {
+		isOneStudentSelected.value = false;
+		console.log(isOneStudentSelected)
+	}
+
+})
+
+const isOneStudentSelected = ref(true)
 
 const isGrade = computed(() => {
 	return !!grade.value;
@@ -148,7 +164,7 @@ const init = () => {
 						placeholder="Select student"
 						:maxSelectedLabels="1"
 						class="w-full md:w-20rem"
-						:invalid="!isStudentSelected"
+						:invalid="!isStudentSelected || isOneStudentSelected"
 					/>
 					<label for="student" class="font-semibold w-6rem">Student</label>
 				</FloatLabel>
