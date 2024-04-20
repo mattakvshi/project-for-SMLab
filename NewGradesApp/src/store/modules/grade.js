@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import api from '../api';
 import Grade from '../../model/Grade';
 import Course from '../../model/Course';
+import { useLoadingStore } from './loading';
 
 export const useGradeStore = defineStore('grade', {
 	state: () => ({
@@ -73,6 +74,22 @@ export const useGradeStore = defineStore('grade', {
 			}
 		},
 
+		async deleteAllGrade() {
+			try {
+				for (const grade of this.grades) {
+					if (!(await api.deleteGrade(grade.code)).resultCode) {
+						grade.isDelete = 1;
+						this.grades.splice(this.grades.indexOf(grade), 1, grade);
+					}
+				}
+			} catch (error) {
+				throw error;
+			} finally {
+				const loadingStore = useLoadingStore();
+				loadingStore.setIsLoading(false);
+			}
+		},
+
 		async initData() {
 			try {
 				this.grades = (await api.initData()).map(
@@ -88,6 +105,9 @@ export const useGradeStore = defineStore('grade', {
 				);
 			} catch (error) {
 				throw error;
+			} finally {
+				const loadingStore = useLoadingStore();
+				loadingStore.setIsLoading(false);
 			}
 		},
 	},

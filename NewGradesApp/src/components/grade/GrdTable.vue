@@ -89,8 +89,10 @@ const calculatedRowsPerPageOptions = computed(() => {
 
 const onCellEditComplete = event => {
 	let { data, newValue, field } = event;
-	if (newValue) data[field] = newValue;
-	else event.preventDefault();
+	if (newValue) {
+		data[field] = newValue;
+		gradeStore.putGrade(data);
+	} else event.preventDefault();
 };
 </script>
 
@@ -127,10 +129,11 @@ const onCellEditComplete = event => {
 						/>
 						<Button
 							v-else
-							style="opacity: 0"
+							@click="gradeStore.deleteAllGrade()"
 							class="mt-3"
+							title="Delete selected grade"
 							type="button"
-							icon="pi pi-refresh"
+							icon="pi pi-replay"
 							text
 							outlined
 						/>
