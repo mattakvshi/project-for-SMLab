@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import GrdTable from '../components/grade/GrdTable.vue';
 import GrdDialog from '../components/grade/GrdDialog.vue';
+import PreloaderSpinner from '../components/PreloaderSpinner.vue';
 
 const suspenseKey = ref(0);
 
@@ -20,18 +21,7 @@ const changeKey = () => {
 	<Suspense :key="suspenseKey">
 		<grd-table></grd-table>
 		<template #fallback>
-			<div
-				class="card flex justify-content-center align-items-center"
-				style="height: 60vh"
-			>
-				<ProgressSpinner
-					style="width: 60px; height: 60px"
-					strokeWidth="8"
-					fill="var(--surface-ground)"
-					animationDuration=".5s"
-					aria-label="Custom ProgressSpinner"
-				/>
-			</div>
+			<preloader-spinner></preloader-spinner>
 		</template>
 	</Suspense>
 </template>

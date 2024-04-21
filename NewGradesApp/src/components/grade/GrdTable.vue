@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, inject, onMounted, h } from 'vue';
+import { ref, computed, inject, onMounted } from 'vue';
 
 import { useStudentStore } from '../../store/modules/student';
 import { useGradeStore } from '../../store/modules/grade';
