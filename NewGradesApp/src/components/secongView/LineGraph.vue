@@ -66,6 +66,9 @@ const value = ref([
 
 <template>
 	<Card style="max-width: 90%">
+		<template #title>
+			<span class="font-bold">Line graph stats:</span>
+		</template>
 		<template #content>
 			<div class="card">
 				<MeterGroup :value="value" />
