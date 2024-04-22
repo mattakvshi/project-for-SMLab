@@ -10,7 +10,7 @@ const actualSortGradesData = computed(() => {
 		.sort((grad1, grade2) => (grad1['grade'] < grade2['grade'] ? 1 : -1));
 });
 
-console.log(actualSortGradesData.value);
+//console.log(actualSortGradesData.value);
 
 const data = ref({
 	label: actualSortGradesData.value[0].studentName,
