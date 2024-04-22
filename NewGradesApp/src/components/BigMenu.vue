@@ -1,7 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const activeLink = ref(0);
+
+onMounted(() => {
+	if (window.location.pathname === '/') {
+		activeLink.value = 0;
+	} else {
+		activeLink.value = 1;
+	}
+});
 
 const activeGrades = () => {
 	//router.push('/');

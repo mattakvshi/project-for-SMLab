@@ -131,7 +131,7 @@ const onCellEditComplete = event => {
 							v-else
 							@click="gradeStore.deleteAllGrade()"
 							class="mt-3"
-							title="Delete selected grade"
+							title="Delete all grades"
 							type="button"
 							icon="pi pi-replay"
 							text

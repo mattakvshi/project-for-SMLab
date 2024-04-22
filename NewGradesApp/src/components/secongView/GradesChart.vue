@@ -10,7 +10,7 @@ const actualSortGradesData = computed(() => {
 		.sort((grad1, grade2) => (grad1['grade'] < grade2['grade'] ? 1 : -1));
 });
 
-//console.log(actualSortGradesData.value);
+console.log(actualSortGradesData.value);
 
 const data = ref({
 	label: actualSortGradesData.value[0].studentName,
@@ -19,13 +19,13 @@ const data = ref({
 	icon: 'pi pi-star-fill mr-2 text-yellow-200',
 	children: [
 		{
-			label: actualSortGradesData.value[2].studentName,
+			label: actualSortGradesData.value[1].studentName,
 			position: 2,
 			styleClass: 'bg-primary-400 text-white border-round-xl',
 			icon: 'pi pi-star-fill mr-2 text-bluegray-200',
 		},
 		{
-			label: actualSortGradesData.value[3].studentName,
+			label: actualSortGradesData.value[2].studentName,
 			position: 3,
 			styleClass: 'bg-blue-400 text-white border-round-xl',
 			icon: 'pi pi-star-fill mr-2 text-bluegray-200',
