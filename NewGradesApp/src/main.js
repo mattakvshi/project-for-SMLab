@@ -21,6 +21,7 @@ import ProgressSpinner from 'primevue/progressspinner';
 import Card from 'primevue/card';
 import MeterGroup from 'primevue/metergroup';
 import OrganizationChart from 'primevue/organizationchart';
+import Chart from 'primevue/chart';
 
 import './assets/app.css';
 //Темы перенесены в public для работы PrimeVue.changeTheme()
@@ -54,6 +55,7 @@ app.component('ProgressSpinner', ProgressSpinner);
 app.component('Card', Card);
 app.component('MeterGroup', MeterGroup);
 app.component('OrganizationChart', OrganizationChart);
+app.component('Chart', Chart);
 
 app.use(router);
 

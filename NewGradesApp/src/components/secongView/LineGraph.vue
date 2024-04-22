@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useGradeStore } from '../../store/modules/grade';
 
 const gradeStore = useGradeStore();
@@ -49,9 +49,6 @@ const actualGradesStats = computed(() => {
 	return gradeCategories.value;
 });
 
-//console.log(actualGradesStats.value);
-//console.log(actualGradesStats.value[4]);
-
 const value = ref([
 	{
 		label: 'Very good',
@@ -87,7 +84,7 @@ const value = ref([
 </script>
 
 <template>
-	<Card style="max-width: 90%">
+	<Card style="width: 100%">
 		<template #title>
 			<span class="font-bold">Line graph stats:</span>
 		</template>

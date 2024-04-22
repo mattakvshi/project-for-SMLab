@@ -35,7 +35,7 @@ const data = ref({
 </script>
 
 <template>
-	<Card style="max-width: 90%">
+	<Card style="width: 100%">
 		<template #title>
 			<span class="font-bold">Top charts:</span>
 		</template>
