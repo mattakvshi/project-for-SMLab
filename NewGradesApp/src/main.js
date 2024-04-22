@@ -22,6 +22,7 @@ import Card from 'primevue/card';
 import MeterGroup from 'primevue/metergroup';
 import OrganizationChart from 'primevue/organizationchart';
 import Chart from 'primevue/chart';
+import Tag from 'primevue/tag';
 
 import './assets/app.css';
 //Темы перенесены в public для работы PrimeVue.changeTheme()
@@ -56,6 +57,7 @@ app.component('Card', Card);
 app.component('MeterGroup', MeterGroup);
 app.component('OrganizationChart', OrganizationChart);
 app.component('Chart', Chart);
+app.component('Tag', Tag);
 
 app.use(router);
 
